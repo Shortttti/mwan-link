@@ -3,9 +3,9 @@ import { CheckCircle2, Images, MapPin, Navigation } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import type { materials } from "./data";
+import type { Material } from "./data";
 
-export function MaterialCard({ material }: { material: (typeof materials)[number] }) {
+export function MaterialCard({ material }: { material: Material }) {
   return <Card className="overflow-hidden border-border shadow-card">
     <img src={material.image} alt={material.title} loading="lazy" width={1200} height={800} className="aspect-[16/9] w-full object-cover" />
     <CardContent className="p-5">
