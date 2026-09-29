@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Build Mwan Link and Deploy to GitHub Pages
 
 on:
   push:
