@@ -6,10 +6,11 @@ export default defineConfig({
   },
   tanstackStart: {
     server: { entry: "server" },
+    spa: { enabled: true },
     prerender: {
       enabled: true,
-      autoStaticPathsDiscovery: true,
-      crawlLinks: true,
+      autoStaticPathsDiscovery: false,
+      crawlLinks: false,
       failOnError: true,
     },
   },
