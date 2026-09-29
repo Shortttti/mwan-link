@@ -33,7 +33,8 @@ jobs:
       - name: Prepare Pages artifact
         run: |
           test -f .output/public/index.html
-          cp .output/public/index.html .output/public/404.html
+          test -f .output/public/_shell.html
+          cp .output/public/_shell.html .output/public/404.html
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
