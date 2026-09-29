@@ -1,5 +1,5 @@
 import { MapPin, LocateFixed, Minus, Plus } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Point = { id: string; lat: number; lng: number; title: string; detail: string; href?: string };
 type Props = { points?: Point[]; value?: { lat: number; lng: number } | null; onSelect?: (point: { lat: number; lng: number }) => void; picker?: boolean; className?: string };
