@@ -8,7 +8,7 @@ export default defineConfig({
     server: { entry: "server" },
     prerender: {
       enabled: true,
-      crawlLinks: true,
+      crawlLinks: false,
       failOnError: true,
     },
   },
