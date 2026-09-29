@@ -3,7 +3,13 @@ import cardboard from "@/assets/material-cardboard.jpg";
 import metal from "@/assets/material-metal.jpg";
 import building from "@/assets/material-building.jpg";
 
-export const materials = [
+export type Material = {
+  id: string; title: string; type: string; quantity: string; city: string; distance: string;
+  condition: string; images: number; verified: string; image: string; lat: number; lng: number;
+  description?: string;
+};
+
+export const materials: Material[] = [
   { id: "wood-jeddah", title: "طبالي خشبية قابلة لإعادة الاستخدام", type: "خشب", quantity: "500 كجم", city: "جدة", distance: "4.2 كم", condition: "جيدة", images: 4, verified: "تقييم بصري تجريبي", image: wood, lat: 21.4858, lng: 39.1925 },
   { id: "cardboard-madinah", title: "كرتون مضغوط ونظيف", type: "كرتون", quantity: "800 كجم", city: "المدينة المنورة", distance: "18 كم", condition: "جيدة", images: 3, verified: "بيانات تجريبية", image: cardboard, lat: 24.5247, lng: 39.5692 },
   { id: "metal-makkah", title: "صفائح ومقاطع معدنية", type: "معدن", quantity: "300 كجم", city: "مكة المكرمة", distance: "72 كم", condition: "متوسطة", images: 5, verified: "تقييم بصري تجريبي", image: metal, lat: 21.3891, lng: 39.8579 },
