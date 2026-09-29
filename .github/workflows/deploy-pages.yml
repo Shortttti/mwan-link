@@ -32,8 +32,8 @@ jobs:
         run: bun run build
       - name: Prepare Pages artifact
         run: |
-          test -f .output/public/index.html
           test -f .output/public/_shell.html
+          cp .output/public/_shell.html .output/public/index.html
           cp .output/public/_shell.html .output/public/404.html
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
