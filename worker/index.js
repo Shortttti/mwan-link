@@ -25,6 +25,11 @@ export default {
     const url = new URL(request.url);
     if (request.method !== "POST" || url.pathname !== "/analyze") return json({ error: "المسار غير موجود." }, 404, origin);
     if (!env.OPENAI_API_KEY) return json({ error: "خدمة التحليل غير مهيأة بمفتاح API." }, 503, origin);
+    if (env.AI_RATE_LIMIT) {
+      const key = request.headers.get("CF-Connecting-IP") || "unknown-client";
+      const { success } = await env.AI_RATE_LIMIT.limit({ key });
+      if (!success) return json({ error: "تم الوصول إلى حد التحليل المؤقت. حاول بعد دقيقة." }, 429, origin);
+    }
     const length = Number(request.headers.get("Content-Length") || 0);
     if (length > MAX_IMAGE_BYTES * 1.4) return json({ error: "حجم الصورة أكبر من المسموح (10 ميغابايت)." }, 413, origin);
     let body;

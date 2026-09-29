@@ -5,3 +5,11 @@ workers_dev = true
 
 [vars]
 OPENAI_MODEL = "gpt-4.1"
+
+[[ratelimits]]
+name = "AI_RATE_LIMIT"
+namespace_id = "1396447566"
+
+  [ratelimits.simple]
+  limit = 8
+  period = 60

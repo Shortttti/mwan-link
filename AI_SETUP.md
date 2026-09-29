@@ -4,8 +4,8 @@
 
 لتشغيلها على GitHub Pages:
 
-1. أنشئ Cloudflare Worker باسم `mwan-link-ai` من مجلد `worker` (أو نفّذ سير العمل `Deploy Mwan Link AI API` بعد إعداد الأسرار).
+1. أنشئ Cloudflare Worker باسم `mwan-link-ai` من مجلد `worker` (أو نفّذ سير العمل `Deploy Mwan Link AI API` بعد إعداد الأسرار). الطلبات محدودة مبدئيًا بثمانية تحليلات في الدقيقة لكل عنوان IP.
 2. أضف أسرار المستودع `CLOUDFLARE_API_TOKEN` و`CLOUDFLARE_ACCOUNT_ID` و`OPENAI_API_KEY` من إعدادات GitHub. يحتاج مفتاح OpenAI تفعيل API وفوترة منفصلة عن اشتراك ChatGPT.
-3. بعد نشر Worker، أضف متغير المستودع `VITE_AI_API_URL` بعنوان Worker الكامل، مثل `https://mwan-link-ai.<حسابك>.workers.dev`، ثم شغّل نشر Pages مجدداً.
+3. بعد نشر Worker، أضف متغير المستودع `VITE_AI_API_URL` بعنوان Worker الكامل، مثل `https://mwan-link-ai.<حسابك>.workers.dev`، ثم شغّل نشر Pages مجدداً. حد التكرار البسيط وسيلة أولية للتحكم؛ راقب الاستخدام والتكلفة قبل فتح الخدمة على نطاق واسع.
 
 لا تضع `OPENAI_API_KEY` في متغيرات `VITE_*` أو في كود المتصفح. عيّن حدود طلبات/تكلفة من لوحة Cloudflare وOpenAI قبل مشاركة الواجهة على نطاق عام.
