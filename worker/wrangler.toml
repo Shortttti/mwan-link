@@ -1,0 +1,7 @@
+name = "mwan-link-ai"
+main = "index.js"
+compatibility_date = "2026-09-29"
+workers_dev = true
+
+[vars]
+OPENAI_MODEL = "gpt-4.1"

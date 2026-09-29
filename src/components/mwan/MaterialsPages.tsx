@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Check, CheckCircle2, Circle, Clock3, MapPin, Navigation, Search, ShieldCheck, Sparkles, Truck, X } from "lucide-react";
+import { Check, CheckCircle2, Circle, Clock3, Search, ShieldCheck, Sparkles, Truck, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { MaterialCard } from "./MaterialCard";
 import { materials } from "./data";
 import { MwanShell, PageIntro } from "./MwanShell";
+import { LocationMap } from "./LocationMap";
 
 const filters = ["كل المواد", "خشب", "معدن", "بلاستيك", "كرتون", "مواد بناء", "أخرى"];
 
@@ -17,7 +18,7 @@ export function MaterialsBrowse() {
   const [query, setQuery] = useState("");
   const shown = useMemo(() => materials.filter((m) => (filter === "كل المواد" || m.type === filter) && `${m.title} ${m.type} ${m.city}`.includes(query)), [filter, query]);
   return <MwanShell><PageIntro title="ابحث عن المواد القابلة للاستفادة" crumbs={["موان لينك", "المواد المتاحة"]} description="استكشف المواد المتاحة بالقرب من منشأتك واطّلع على مستوى التحقق قبل تقديم الطلب." /><div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8"><div className="relative"><Search className="absolute right-4 top-1/2 size-5 -translate-y-1/2 text-muted-foreground"/><Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="ابحث عن مادة أو مدينة…" className="h-12 bg-card pr-12" /></div><div className="mt-4 flex gap-2 overflow-x-auto pb-2">{filters.map((item) => <Button key={item} size="sm" variant={filter === item ? "default" : "outline"} onClick={() => setFilter(item)}>{item}</Button>)}</div>
-      <div className="mt-7 overflow-hidden rounded-lg border border-border bg-section"><div className="relative h-72"><div className="absolute inset-0 opacity-40" style={{ backgroundImage: "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)", backgroundSize: "42px 42px" }} /><div className="absolute inset-x-0 top-1/2 h-4 -rotate-3 bg-card shadow-sm"/><div className="absolute inset-y-0 left-1/3 w-4 rotate-12 bg-card shadow-sm"/><div className="absolute right-[18%] top-[48%] flex items-center gap-2 rounded-md bg-foreground px-3 py-2 text-xs text-background shadow-card"><Navigation className="size-4"/> موقعك</div>{materials.map((m) => <Link key={m.id} to="/mwan-link/materials/$materialId" params={{ materialId: m.id }} className="absolute grid size-10 place-items-center rounded-full border-4 border-card bg-primary text-primary-foreground shadow-card" style={{ top: m.lat, left: m.lng }} aria-label={m.title}><MapPin className="size-5"/></Link>)}</div><div className="flex items-center justify-between border-t border-border bg-card px-4 py-3 text-xs text-muted-foreground"><span>موقع تقريبي لحماية خصوصية المنشآت</span><span>{materials.length} مواد متاحة</span></div></div>
+      <div className="mt-7"><LocationMap points={materials.map(m => ({ id:m.id, lat:m.lat, lng:m.lng, title:m.title, detail:`${m.type} · ${m.quantity} · ${m.city}`, href:`/mwan-link/materials/${m.id}` }))} className="w-full"/><p className="mt-2 text-xs text-muted-foreground">النقاط الحالية بيانات تجريبية تمثل مراكز المدن وليست مواقع منشآت حقيقية. ستظهر المواقع الدقيقة عند إدخال إحداثياتها المعتمدة.</p></div>
       <div className="mt-10 flex items-center justify-between"><h2 className="text-xl font-extrabold">المواد المتاحة ({shown.length})</h2><span className="text-sm text-muted-foreground">مرتبة حسب الأقرب</span></div><div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{shown.map((m) => <MaterialCard key={m.id} material={m} />)}</div>{shown.length === 0 && <div className="mt-6 border border-border bg-muted p-10 text-center text-muted-foreground">لا توجد مواد مطابقة لبحثك.</div>}
       <section className="mt-12 border border-primary/30 bg-secondary p-6"><div className="flex flex-col justify-between gap-6 md:flex-row md:items-center"><div className="flex gap-4"><Sparkles className="mt-1 size-7 shrink-0 text-primary"/><div><h2 className="font-extrabold">المطابقة الذكية</h2><p className="mt-2 max-w-2xl text-sm leading-7 text-muted-foreground">لديك احتياج محدد؟ تساعدك موان لينك في المطابقة بين المادة والكمية والحالة والموقع، ويمكن تقسيم الكمية على أكثر من جهة.</p></div></div><Button asChild><Link to="/mwan-link/matching">عرض اقتراح المطابقة</Link></Button></div></section>
     </div></MwanShell>;

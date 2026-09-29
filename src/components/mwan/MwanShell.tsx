@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Bell, ChevronLeft, Globe2, Menu, Search, UserRound, X } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
+import officialLogo from "@/assets/mwan-official-logo.png";
 
 const navItems = [
   { label: "الرئيسية", to: "/" as const },
@@ -12,17 +13,8 @@ const navItems = [
 
 export function MwanMark({ compact = false }: { compact?: boolean }) {
   return (
-    <Link to="/" className="flex items-center gap-3" aria-label="موان - الصفحة الرئيسية">
-      <span className="relative grid size-11 place-items-center rounded-lg bg-primary text-primary-foreground">
-        <span className="absolute size-6 rotate-45 rounded-sm border-2 border-current" />
-        <span className="size-2 rounded-full bg-accent" />
-      </span>
-      {!compact && (
-        <span className="leading-tight">
-          <strong className="block text-xl font-extrabold text-primary">مــوان</strong>
-          <span className="block text-[10px] font-semibold text-muted-foreground">المركز الوطني لإدارة النفايات</span>
-        </span>
-      )}
+    <Link to="/" className="flex items-center" aria-label="موان - الصفحة الرئيسية">
+      <img src={officialLogo} alt="شعار المركز الوطني لإدارة النفايات موان" className={compact ? "h-8 w-auto" : "h-12 w-auto max-w-[220px] object-contain"} />
     </Link>
   );
 }

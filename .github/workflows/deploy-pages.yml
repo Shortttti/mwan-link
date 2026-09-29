@@ -27,6 +27,8 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
       - name: Build and prerender
+        env:
+          VITE_AI_API_URL: ${{ vars.VITE_AI_API_URL }}
         run: bun run build
       - name: Prepare Pages artifact
         run: |
