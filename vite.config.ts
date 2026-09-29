@@ -8,8 +8,8 @@ export default defineConfig({
     server: { entry: "server" },
     prerender: {
       enabled: true,
-      autoStaticPathsDiscovery: false,
-      crawlLinks: false,
+      autoStaticPathsDiscovery: true,
+      crawlLinks: true,
       failOnError: true,
     },
   },
