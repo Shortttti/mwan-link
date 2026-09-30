@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { materials, type Material } from "./data";
 
 const STORAGE_KEY = "mwan-link.user-materials.v1";
+const COMPLETED_KEY = "mwan-link.completed-materials.v1";
 const CHANGE_EVENT = "mwan-link:materials-changed";
 
 function readSavedMaterials(): Material[] {
@@ -11,10 +12,18 @@ function readSavedMaterials(): Material[] {
   } catch { return []; }
 }
 
+function readCompletedIds(): string[] {
+  try {
+    const completed = JSON.parse(localStorage.getItem(COMPLETED_KEY) || "[]");
+    return Array.isArray(completed) ? completed.filter((id): id is string => typeof id === "string") : [];
+  } catch { return []; }
+}
+
 export function useMaterials() {
   const [saved, setSaved] = useState<Material[]>([]);
+  const [completedIds, setCompletedIds] = useState<string[]>([]);
   useEffect(() => {
-    const refresh = () => setSaved(readSavedMaterials());
+    const refresh = () => { setSaved(readSavedMaterials()); setCompletedIds(readCompletedIds()); };
     refresh();
     window.addEventListener(CHANGE_EVENT, refresh);
     window.addEventListener("storage", refresh);
@@ -25,7 +34,13 @@ export function useMaterials() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     window.dispatchEvent(new Event(CHANGE_EVENT));
   };
-  return { materials: [...saved, ...materials], addMaterial };
+  const completeMaterial = (id: string) => {
+    const next = Array.from(new Set([...readCompletedIds(), id]));
+    localStorage.setItem(COMPLETED_KEY, JSON.stringify(next));
+    window.dispatchEvent(new Event(CHANGE_EVENT));
+  };
+  const allMaterials = [...saved, ...materials];
+  return { materials: allMaterials, availableMaterials: allMaterials.filter((material) => !completedIds.includes(material.id)), completedIds, addMaterial, completeMaterial };
 }
 
 export function imageFileToDataUrl(file: File): Promise<string> {
