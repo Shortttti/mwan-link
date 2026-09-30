@@ -47,7 +47,7 @@ import {
 export const Route = createFileRoute("/mvp")({
   head: () => ({
     meta: [
-      { title: "موان | مركز عمليات MVP" },
+      { title: "وصال | مركز عمليات MVP" },
       {
         name: "description",
         content:
@@ -256,7 +256,7 @@ function MvpPage() {
             </button>
             <div>
               <p className="mb-1 text-[10px] font-bold tracking-[0.18em] text-[#8b9b95]">
-                MWAN / MVP OPERATIONS
+                WISAL / MVP OPERATIONS
               </p>
               <h1 className="text-base font-extrabold sm:text-lg">{title}</h1>
             </div>
@@ -297,7 +297,7 @@ function MvpPage() {
         </main>
 
         <footer className="flex flex-col justify-between gap-2 border-t border-[#dfe8e5] bg-white px-6 py-5 text-[9px] text-[#8b9a95] sm:flex-row">
-          <span>MWAN Construction Waste Intelligence MVP</span>
+          <span>WISAL Construction Waste Intelligence MVP</span>
           <span>بيانات محاكاة لأغراض العرض والاختبار فقط · 2026</span>
         </footer>
       </div>
@@ -336,7 +336,7 @@ function Sidebar({
             م
           </div>
           <div>
-            <b className="block text-xl">موان</b>
+            <b className="block text-xl">وصال</b>
             <span className="text-[9px] tracking-[0.18em] text-[#88a79b]">
               WASTE INTELLIGENCE MVP
             </span>
@@ -402,7 +402,7 @@ function Sidebar({
             ))}
           </div>
           <p className="px-2 pt-3 text-[8px] leading-5 text-[#607b70]">
-            هذا الـMVP مستقل عن الأنظمة التشغيلية الفعلية لموان، والبيانات
+            هذا الـMVP يمثل خدمة وصال ضمن مشروع موان، وهو مستقل عن الأنظمة التشغيلية الفعلية، والبيانات
             المعروضة محاكاة لأغراض العرض.
           </p>
         </div>
