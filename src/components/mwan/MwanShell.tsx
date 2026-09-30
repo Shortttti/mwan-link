@@ -7,7 +7,7 @@ import officialLogo from "@/assets/mwan-official-logo.png";
 const navItems = [
   { label: "الرئيسية", to: "/" as const },
   { label: "الخدمات الإلكترونية", to: "/mwan-link" as const },
-  { label: "موان لينك", to: "/mwan-link/materials" as const },
+  { label: "وصال", to: "/mwan-link/materials" as const },
   { label: "لوحة التحكم", to: "/mwan-link/dashboard" as const },
 ];
 
